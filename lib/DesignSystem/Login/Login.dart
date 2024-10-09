@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import '../Components/Buttons/ActionButton/action_button.dart';
 import '../Components/Buttons/ActionButton/action_button_view_model.dart';
-import '../Components/InputField/input_text.dart';
 import '../Components/InputField/input_text_view_model.dart';
 import '../Components/LinkedLabel/linked_label.dart';
+import '../Components/InputField/input_text.dart';
 import '../Components/LinkedLabel/linked_label_view_model.dart';
-import 'package:flutter/material.dart';
+import 'Perfil.dart'; // Importe a tela ProfileScreen
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -26,18 +29,18 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              color: Colors.grey[300],
-              child: const Center(
+            const SizedBox(
+              width: 150,
+              height: 150,
+              child: Center(
                 child: Icon(
-                  Icons.person,
-                  size: 50,
-                  color: Colors.grey,
+                  Icons.image,
+                  size: 150,
+                  color: CupertinoColors.systemGrey5,
                 ),
               ),
             ),
+
             const SizedBox(height: 20),
 
             // Email input field
@@ -65,7 +68,7 @@ class LoginScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed:()=>null,
+                onPressed: () {},
                 child: const Text('Forgot Password'),
               ),
             ),
@@ -81,7 +84,18 @@ class LoginScreen extends StatelessWidget {
                   size: ActionButtonSize.large,
                   style: ActionButtonStyle.primary,
                   text: 'Login',
-                  onPressed: ()=>null,
+                  onPressed: () {
+                    // Navega para a ProfileScreen quando o login for bem-sucedido
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(
+                          name: "John Doe",
+                          email: "john.doe@example.com",
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -93,7 +107,7 @@ class LoginScreen extends StatelessWidget {
               viewModel: LinkedLabelViewModel(
                 fullText: "Don't have an account? ",
                 linkedText: 'Sign Up',
-                onLinkTap: ()=>null,
+                onLinkTap: () {},
               ),
             ),
             const SizedBox(height: 20), // Space between message and Sign Up button
@@ -102,7 +116,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               width: 90,
               child: ElevatedButton(
-                onPressed: ()=>null,
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber, // Sign Up button color
                   padding: const EdgeInsets.symmetric(vertical: 16), // Adjust button height

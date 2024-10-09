@@ -1,100 +1,175 @@
-import '../Components/Buttons/ActionButton/action_button.dart';
 import 'package:flutter/material.dart';
 
-import '../Components/Buttons/ActionButton/action_button_view_model.dart';
+import '../Components/BottomTabBar/bottom_tab_bar.dart';
+import '../Components/BottomTabBar/bottom_tab_bar_view_model.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   final String name;
   final String email;
-  final String phone;
 
   const ProfileScreen({
     super.key,
     required this.name,
     required this.email,
-    required this.phone,
   });
 
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  int actualIndex = 3; // Variável de estado para armazenar o índice atual da aba
+
+  final List<Widget> pages = [
+    const Center(child: Text('Home Page')),
+    const Center(child: Text('Messages Page')),
+    const Center(child: Text('Label Page')),
+    const Center(child: Text('Profile Page')),
+  ];
+
   // Handles logout action
-  void Logout() {}
+  void handleLogout() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
+        centerTitle: false,
       ),
-      body: Container(
-        color: Colors.white, // Sets background to white
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey[300],
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.person,
-                  size: 50,
-                  color: Colors.grey,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 20),
+
+          // Profile Section
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              children: [
+                // Profile picture
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundImage: AssetImage('assets/profile.jpg'), // Substitua pela imagem correta
                 ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Display Name
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-
-            // Display Email
-            Text(
-              email,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 8),
-
-            // Display Phone
-            Text(
-              phone,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Logout button
-            SizedBox(
-              width: double.infinity,
-              height: 55, // Increased button height
-              child: ActionButton.instantiate(
-                viewModel: ActionButtonViewModel(
-                  size: ActionButtonSize.large,
-                  style: ActionButtonStyle.primary,
-                  text: 'Logout',
-                  onPressed: Logout,
+                const SizedBox(width: 16),
+                // Name and Email
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.name,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      widget.email,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              ],
             ),
+          ),
+
+          const SizedBox(height: 40),
+
+          // List of profile options
+          Expanded(
+            child: ListView(
+              children: [
+                _buildProfileOption('Edit Name'),
+                _buildProfileOption('Shipping Info'),
+                _buildProfileOption('Notification'),
+                _buildProfileOption('Terms & Condition'),
+                const SizedBox(height: 20),
+
+                // Logout option
+                ListTile(
+                  title: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 18,
+                    ),
+                  ),
+                  onTap: handleLogout,
+                ),
+              ],
+            ),
+          ),
+
+          // Exibir a página de acordo com o índice atual
+          Expanded(
+            child: pages[actualIndex],
+          ),
+        ],
+      ),
+
+      // Barra de navegação inferior
+      bottomNavigationBar: BottomTabBar.instantiate(
+        viewModel: BottomTabBarViewModel(
+          bottomTabs: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.message),
+              label: "Messages",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.label),
+              label: "Label",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile",
+            )
           ],
+          onIndexChanged: (index) {
+            setState(() {
+              actualIndex = 3; // Atualiza o índice quando uma aba é selecionada
+            });
+          },
+        ),
+        currentIndex: actualIndex,
+      ),
+    );
+  }
+
+  // Function to build a profile option with an arrow icon
+  Widget _buildProfileOption(String title) {
+    return ListTile(
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 18,
         ),
       ),
+      trailing: const Icon(
+        Icons.arrow_forward_ios,
+        size: 16,
+        color: Colors.grey,
+      ),
+      onTap: () {
+        // Handle navigation to respective screens
+      },
     );
   }
 }

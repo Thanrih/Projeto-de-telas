@@ -108,7 +108,7 @@ const TextStyle button2Semibold = TextStyle(
   fontFamily: 'Inter',
   fontSize: 14,
   fontWeight: FontWeight.w600,
-  color: normalPrimaryBaseColorLight,
+  color: Colors.grey,
 );
 
 const TextStyle button3Semibold = TextStyle(

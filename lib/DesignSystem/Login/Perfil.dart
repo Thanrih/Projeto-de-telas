@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../Components/BottomTabBar/bottom_tab_bar.dart';
@@ -57,9 +59,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               children: [
                 // Profile picture
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 40,
-                  backgroundImage: AssetImage('./assets/i490875'), // Substitua pela imagem correta
+                  backgroundImage: FileImage(File('i490875.jpeg')), // Substitua pelo caminho correto
                 ),
                 const SizedBox(width: 16),
                 // Name and Email

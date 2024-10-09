@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
   });
 
   // Handles logout action
-  void handleLogout() {}
+  void Logout() {}
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class ProfileScreen extends StatelessWidget {
                   size: ActionButtonSize.large,
                   style: ActionButtonStyle.primary,
                   text: 'Logout',
-                  onPressed: handleLogout,
+                  onPressed: Logout,
                 ),
               ),
             ),

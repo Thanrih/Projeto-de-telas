@@ -1,11 +1,50 @@
+enum TextSize {
+  small,
+  medium,
+  large,
+}
+
+enum TextColor {
+  primary,
+  secondary,
+  tertiary,
+}
+
+enum LinkedTextColor {
+  primary,
+  secondary,
+  tertiary,
+}
+
+enum TextWeight {
+  thin,
+  light,
+  regular,
+  bold,
+}
+
+enum TextDecoration {
+  none,
+  underline,
+  lineThrough,
+}
+
 class LinkedLabelViewModel {
-  final String fullText;
+  final String text;
   final String linkedText;
-  final Function()? onLinkTap;
+  final TextSize textSize;
+  final TextColor textColor;
+  final LinkedTextColor linkedTextColor;
+  final TextWeight textWeight;
+  final TextDecoration textDecoration;
 
   LinkedLabelViewModel({
-    required this.fullText,
+    required this.text,
     required this.linkedText,
-    required this.onLinkTap
+    required this.textSize,
+    required this.textColor,
+    required this.linkedTextColor,
+    required this.textWeight,
+    required this.textDecoration,
   });
 }

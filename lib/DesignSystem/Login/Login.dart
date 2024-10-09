@@ -1,3 +1,4 @@
+import 'package:designsystemsampleapp/DesignSystem/Login/Signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,7 @@ class LoginScreen extends StatelessWidget {
             StyledInputField.instantiate(
               viewModel: InputTextViewModel(
                 controller: emailController,
-                placeholder: 'Email',
+                placeholder: 'E-mail',
                 password: false,
               ),
             ),
@@ -103,20 +104,22 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 150), // Spacer to adjust text position
 
             // "Don't Have An Account?" message
-            LinkedLabel.instantiate(
-              viewModel: LinkedLabelViewModel(
-                fullText: "Don't have an account? ",
-                linkedText: 'Sign Up',
-                onLinkTap: () {},
-              ),
-            ),
+            Text('Dont have an account?'),
             const SizedBox(height: 20), // Space between message and Sign Up button
 
             // Sign Up button
             SizedBox(
               width: 90,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Navegar para a tela RegisterScreen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterScreen(), // Certifique-se de que a tela RegisterScreen exista
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber, // Sign Up button color
                   padding: const EdgeInsets.symmetric(vertical: 16), // Adjust button height

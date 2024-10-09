@@ -21,10 +21,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int actualIndex = 3; // Variável de estado para armazenar o índice atual da aba
 
   final List<Widget> pages = [
-    const Center(child: Text('Home Page')),
-    const Center(child: Text('Messages Page')),
-    const Center(child: Text('Label Page')),
-    const Center(child: Text('Profile Page')),
+    const Center(child: Text('')),
+    const Center(child: Text('')),
+    const Center(child: Text('')),
+    const Center(child: Text('')),
   ];
 
   // Handles logout action
@@ -59,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // Profile picture
                 const CircleAvatar(
                   radius: 40,
-                  backgroundImage: AssetImage('assets/profile.jpg'), // Substitua pela imagem correta
+                  backgroundImage: AssetImage('./assets/i490875'), // Substitua pela imagem correta
                 ),
                 const SizedBox(width: 16),
                 // Name and Email

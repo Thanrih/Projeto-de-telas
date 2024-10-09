@@ -1,3 +1,5 @@
+import 'package:designsystemsampleapp/DesignSystem/Login/Login.dart';
+
 import '../Components/Buttons/ActionButton/action_button.dart';
 import '../Components/Buttons/ActionButton/action_button_view_model.dart';
 import '../Components/InputField/input_text.dart';
@@ -51,7 +53,7 @@ class RegisterScreen extends StatelessWidget {
             StyledInputField.instantiate(
               viewModel: InputTextViewModel(
                 controller: emailController,
-                placeholder: 'Email',
+                placeholder: 'E-mail',
                 password: false,
               ),
             ),
@@ -67,20 +69,24 @@ class RegisterScreen extends StatelessWidget {
                 togglePasswordVisibility: () {},
               ),
             ),
-            const SizedBox(height: 16),
-
-            // Confirm password input field
-            StyledInputField.instantiate(
-              viewModel: InputTextViewModel(
-                controller: confirmPasswordController,
-                placeholder: 'Confirm Password',
-                password: true,
-                suffixIcon: const Icon(Icons.visibility),
-                togglePasswordVisibility: () {},
-              ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                const Checkbox(value:false, onChanged: null,shape: CircleBorder(),),
+        LinkedLabel.instantiate(
+          viewModel: LinkedLabelViewModel(
+              text: 'I have read and agree',
+              linkedText: ' Terms & Services',
+              textSize: TextSize.small,
+              textColor: TextColor.primary,
+              linkedTextColor: LinkedTextColor.primary,
+              textWeight: TextWeight.regular,
+              textDecoration:TextDecoration.none),
+        ),
+              ],
             ),
             const SizedBox(height: 20),
-
+// Checkbox for password visibility
             // Register button with increased height
             SizedBox(
               width: double.infinity,
@@ -89,22 +95,39 @@ class RegisterScreen extends StatelessWidget {
                 viewModel: ActionButtonViewModel(
                   size: ActionButtonSize.large,
                   style: ActionButtonStyle.primary,
-                  text: 'Register',
+                  text: 'Sign Up',
                   onPressed: handleRegister,
                 ),
               ),
             ),
 
-            const SizedBox(height: 150), // Spacer to adjust text position
+            const SizedBox(height: 150),
 
-            // "Already have an account?" message
-            LinkedLabel.instantiate(
-              viewModel: LinkedLabelViewModel(
-                fullText: "Already have an account? ",
-                linkedText: 'Login',
-                onLinkTap: handleLoginRedirect,
-              ),
+            // Linked label for redirect to login
+        LinkedLabel.instantiate(
+          viewModel: LinkedLabelViewModel(text: 'Already Have An Account?', linkedText: '', textSize: TextSize.small, textColor: TextColor.primary, linkedTextColor: LinkedTextColor.tertiary, textWeight: TextWeight.bold, textDecoration:TextDecoration.none),),
+        const SizedBox(height: 20), // Space between message and Sign Up button
+
+        // Sign Up button
+        SizedBox(
+          width: 90,
+          child: ElevatedButton(
+            onPressed: () {
+              // Navegar para a tela RegisterScreen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(), // Certifique-se de que a tela RegisterScreen exista
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber, // Sign Up button color
+              padding: const EdgeInsets.symmetric(vertical: 16), // Adjust button height
             ),
+            child: const Text('Sign In'),
+          ),
+        ),
           ],
         ),
       ),
